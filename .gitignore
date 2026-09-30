@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.artifacts/
+.DS_Store
+data/*.db
+data/gtsrb/
+models/*.pt
+models/*.pth
+!models/gtsrb_cnn.pt
+reports/*.json
+reports/*.csv
+!reports/training_report.json
+!reports/training_history.csv
