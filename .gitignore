@@ -6,6 +6,7 @@ __pycache__/
 .DS_Store
 data/*.db
 data/gtsrb/
+data/tsrd/
 models/*.pt
 models/*.pth
 !models/gtsrb_cnn.pt

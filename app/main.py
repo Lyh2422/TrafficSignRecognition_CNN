@@ -9,7 +9,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from .database import HistoryRepository
-from .labels import GTSRB_LABELS
+from .labels import DATASET_INFO, TSRD_LABELS
 from .predictor import InvalidImageError, Predictor
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -17,9 +17,9 @@ STATIC_DIR = BASE_DIR / "static"
 MAX_UPLOAD_BYTES = 8 * 1024 * 1024
 
 app = FastAPI(
-    title="交通标志识别系统 MVP",
-    description="基于卷积神经网络的交通标志识别系统后端接口",
-    version="0.1.0",
+    title="中国交通标志识别系统",
+    description="基于卷积神经网络和 TSRD 数据集的中国交通标志识别接口",
+    version="1.0.0",
 )
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
@@ -39,7 +39,8 @@ def health() -> dict:
         "mode": predictor.mode,
         "model_message": predictor.load_message,
         "model_metadata": predictor.metadata,
-        "class_count": len(GTSRB_LABELS),
+        "class_count": len(TSRD_LABELS),
+        "dataset": DATASET_INFO,
         "max_upload_mb": MAX_UPLOAD_BYTES // 1024 // 1024,
     }
 

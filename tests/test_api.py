@@ -28,10 +28,10 @@ def teardown_module():
     TEST_DB.unlink(missing_ok=True)
 
 
-def test_health_reports_43_classes():
+def test_health_reports_58_chinese_classes():
     response = client.get("/api/health")
     assert response.status_code == 200
-    assert response.json()["class_count"] == 43
+    assert response.json()["class_count"] == 58
 
 
 def test_predict_and_history_round_trip():
@@ -55,4 +55,3 @@ def test_rejects_non_image_file():
 def test_rejects_corrupted_image():
     response = client.post("/api/predict", files={"file": ("bad.png", b"broken", "image/png")})
     assert response.status_code == 422
-
