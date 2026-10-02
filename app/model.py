@@ -1,19 +1,22 @@
-"""CNN architecture used when a trained GTSRB weight file is available."""
+"""Lightweight CNN architecture for Chinese traffic-sign classification."""
 
 from __future__ import annotations
 
 try:
     import torch
     from torch import nn
+    from torchvision.models import MobileNet_V3_Small_Weights, mobilenet_v3_small
 except ImportError:  # The MVP can run in explicitly labelled demo mode without PyTorch.
     torch = None
     nn = None
+    MobileNet_V3_Small_Weights = None
+    mobilenet_v3_small = None
 
 
 if nn is not None:
 
     class TrafficSignCNN(nn.Module):
-        """CNN that preserves spatial detail for fine-grained GTSRB classes."""
+        """CNN that preserves spatial detail for fine-grained TSRD classes."""
 
         def __init__(self, num_classes: int = 43) -> None:
             super().__init__()
@@ -42,6 +45,7 @@ if nn is not None:
                 nn.ReLU(inplace=True),
                 nn.MaxPool2d(2),
                 nn.Dropout2d(0.16),
+                nn.AdaptiveAvgPool2d((4, 4)),
             )
             self.classifier = nn.Sequential(
                 nn.Flatten(),
@@ -57,3 +61,21 @@ if nn is not None:
 
 else:
     TrafficSignCNN = None
+
+
+def build_model(
+    num_classes: int,
+    architecture: str = "mobilenet_v3_small",
+    pretrained: bool = False,
+):
+    """Build the selected CNN without downloading weights during inference."""
+    if nn is None:
+        return None
+    if architecture == "custom_cnn":
+        return TrafficSignCNN(num_classes=num_classes)
+    if architecture == "mobilenet_v3_small":
+        weights = MobileNet_V3_Small_Weights.DEFAULT if pretrained else None
+        model = mobilenet_v3_small(weights=weights)
+        model.classifier[3] = nn.Linear(model.classifier[3].in_features, num_classes)
+        return model
+    raise ValueError(f"Unsupported model architecture: {architecture}")
