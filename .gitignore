@@ -9,8 +9,8 @@ data/gtsrb/
 data/tsrd/
 models/*.pt
 models/*.pth
-!models/gtsrb_cnn.pt
+!models/tsrd_cnn.pt
 reports/*.json
 reports/*.csv
-!reports/training_report.json
-!reports/training_history.csv
+!reports/tsrd_training_report.json
+!reports/tsrd_training_history.csv

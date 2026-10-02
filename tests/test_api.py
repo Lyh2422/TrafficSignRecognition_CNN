@@ -41,6 +41,9 @@ def test_predict_and_history_round_trip():
     assert len(result["top3"]) == 3
     assert result["mode"] in {"demo", "cnn"}
     assert 0 <= result["prediction"]["confidence"] <= 1
+    assert result["decision"] in {"recognized", "uncertain"}
+    assert isinstance(result["recognized"], bool)
+    assert result["prediction"]["category"] in {"限速", "禁令", "指示", "警告"}
 
     history = client.get("/api/history").json()["items"]
     assert len(history) == 1

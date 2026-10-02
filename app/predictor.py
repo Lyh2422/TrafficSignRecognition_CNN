@@ -1,4 +1,4 @@
-"""Prediction service with real-CNN and clearly marked demo modes."""
+"""Prediction service for the Chinese TSRD CNN with uncertainty rejection."""
 
 from __future__ import annotations
 
@@ -12,7 +12,7 @@ import numpy as np
 from PIL import Image, ImageOps, UnidentifiedImageError
 
 from .labels import LABEL_BY_ID
-from .model import TrafficSignCNN, torch
+from .model import build_model, torch
 
 
 class InvalidImageError(ValueError):
@@ -20,12 +20,14 @@ class InvalidImageError(ValueError):
 
 
 class Predictor:
-    image_size = 32
-    mean = np.array([0.3403, 0.3121, 0.3214], dtype=np.float32)
-    std = np.array([0.2724, 0.2608, 0.2669], dtype=np.float32)
+    image_size = 96
+    mean = np.array([0.485, 0.456, 0.406], dtype=np.float32)
+    std = np.array([0.229, 0.224, 0.225], dtype=np.float32)
+    confidence_threshold = 0.45
+    margin_threshold = 0.20
 
     def __init__(self) -> None:
-        default_path = Path(__file__).resolve().parent.parent / "models" / "gtsrb_cnn.pt"
+        default_path = Path(__file__).resolve().parent.parent / "models" / "tsrd_cnn.pt"
         self.model_path = Path(os.getenv("TSR_MODEL_PATH", str(default_path)))
         self.model = None
         self.metadata = {}
@@ -34,28 +36,50 @@ class Predictor:
         self._try_load_model()
 
     def _try_load_model(self) -> None:
-        if torch is None or TrafficSignCNN is None:
+        if torch is None:
             self.load_message = "PyTorch 未安装，当前结果仅用于演示系统流程。"
             return
         if not self.model_path.exists():
             return
 
         try:
-            model = TrafficSignCNN(num_classes=len(LABEL_BY_ID))
             checkpoint = torch.load(self.model_path, map_location="cpu", weights_only=True)
             state_dict = checkpoint.get("model_state_dict", checkpoint) if isinstance(checkpoint, dict) else checkpoint
+            architecture = (
+                checkpoint.get("model_name", "mobilenet_v3_small")
+                if isinstance(checkpoint, dict)
+                else "mobilenet_v3_small"
+            )
+            model = build_model(
+                num_classes=len(LABEL_BY_ID),
+                architecture=architecture,
+                pretrained=False,
+            )
             model.load_state_dict(state_dict)
             model.eval()
             self.model = model
             if isinstance(checkpoint, dict):
                 self.metadata = {
                     key: checkpoint[key]
-                    for key in ("model_name", "model_version", "epoch", "val_accuracy", "val_macro_f1")
+                    for key in (
+                        "model_name",
+                        "model_version",
+                        "epoch",
+                        "val_accuracy",
+                        "val_macro_f1",
+                        "test_accuracy",
+                        "test_macro_f1",
+                        "dataset",
+                        "image_size",
+                    )
                     if key in checkpoint
                 }
+                self.image_size = int(checkpoint.get("image_size", self.image_size))
+                self.mean = np.asarray(checkpoint.get("mean", self.mean), dtype=np.float32)
+                self.std = np.asarray(checkpoint.get("std", self.std), dtype=np.float32)
             self.mode = "cnn"
-            accuracy = self.metadata.get("val_accuracy")
-            suffix = f"，验证准确率 {accuracy:.2%}" if isinstance(accuracy, (int, float)) else ""
+            accuracy = self.metadata.get("test_accuracy")
+            suffix = f"，独立测试准确率 {accuracy:.2%}" if isinstance(accuracy, (int, float)) else ""
             self.load_message = f"已加载 CNN 权重：{self.model_path.name}{suffix}"
         except Exception as exc:  # Keep the site usable while surfacing the exact model problem.
             self.load_message = f"权重加载失败，已进入演示模式：{type(exc).__name__}"
@@ -89,16 +113,29 @@ class Predictor:
             label = LABEL_BY_ID[int(index)]
             predictions.append({**label, "confidence": round(float(probabilities[index]), 6)})
 
+        margin = float(probabilities[indices[0]] - probabilities[indices[1]])
+        recognized = (
+            self.mode == "cnn"
+            and predictions[0]["confidence"] >= self.confidence_threshold
+            and margin >= self.margin_threshold
+        )
+
         if self.mode != "cnn":
             warning = self.load_message
-        elif predictions[0]["confidence"] < 0.55:
-            warning = "模型置信度较低，请上传主体居中、裁剪紧凑且清晰的单个交通标志图片。"
+        elif not recognized:
+            warning = (
+                "模型无法可靠确认该图片。请上传属于中国 TSRD 58 类、主体居中、"
+                "裁剪紧凑且清晰的单个交通标志。"
+            )
         else:
             warning = None
 
         return {
             "prediction": predictions[0],
             "top3": predictions,
+            "recognized": recognized,
+            "decision": "recognized" if recognized else "uncertain",
+            "confidence_margin": round(margin, 6),
             "inference_ms": round((time.perf_counter() - started) * 1000, 2),
             "mode": self.mode,
             "warning": warning,
@@ -130,11 +167,12 @@ class Predictor:
         blue_strength = max(0.0, blue - (red + green) / 2)
         yellow_strength = max(0.0, min(red, green) - blue)
 
-        for class_id in [0, 1, 2, 3, 4, 5, 7, 8, 13, 14, 17]:
+        for class_id in list(range(20)) + [52, 53, 54, 55, 56, 57]:
             logits[class_id] += 1.6 + red_strength * 8
-        for class_id in [33, 34, 35, 36, 37, 38, 39, 40]:
+        for class_id in range(20, 33):
             logits[class_id] += 1.5 + blue_strength * 9
-        logits[12] += 1.2 + yellow_strength * 8
+        for class_id in range(33, 52):
+            logits[class_id] += 1.2 + yellow_strength * 8
 
         # The hash makes repeated uploads stable while the color features affect the candidate family.
         logits[seed % len(LABEL_BY_ID)] += 0.9

@@ -35,10 +35,18 @@ class HistoryRepository:
                     width INTEGER NOT NULL,
                     height INTEGER NOT NULL,
                     top3_json TEXT NOT NULL,
+                    recognized INTEGER NOT NULL DEFAULT 1,
                     created_at TEXT NOT NULL DEFAULT (datetime('now', 'localtime'))
                 )
                 """
             )
+            columns = {
+                row[1] for row in connection.execute("PRAGMA table_info(recognitions)").fetchall()
+            }
+            if "recognized" not in columns:
+                connection.execute(
+                    "ALTER TABLE recognitions ADD COLUMN recognized INTEGER NOT NULL DEFAULT 1"
+                )
 
     def add(self, filename: str, result: dict) -> int:
         prediction = result["prediction"]
@@ -47,8 +55,8 @@ class HistoryRepository:
                 """
                 INSERT INTO recognitions (
                     filename, class_id, name_zh, confidence, inference_ms,
-                    mode, width, height, top3_json
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    mode, width, height, top3_json, recognized
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     filename,
@@ -60,6 +68,7 @@ class HistoryRepository:
                     result["image"]["width"],
                     result["image"]["height"],
                     json.dumps(result["top3"], ensure_ascii=False),
+                    int(result.get("recognized", False)),
                 ),
             )
             return int(cursor.lastrowid)
@@ -73,6 +82,7 @@ class HistoryRepository:
         for row in rows:
             item = dict(row)
             item["top3"] = json.loads(item.pop("top3_json"))
+            item["recognized"] = bool(item["recognized"])
             records.append(item)
         return records
 
@@ -81,4 +91,3 @@ class HistoryRepository:
             count = connection.execute("SELECT COUNT(*) FROM recognitions").fetchone()[0]
             connection.execute("DELETE FROM recognitions")
             return int(count)
-
