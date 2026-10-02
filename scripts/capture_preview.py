@@ -1,4 +1,4 @@
-"""Capture a deterministic README screenshot with a real GTSRB sample."""
+"""Capture a deterministic README screenshot with a real Chinese TSRD sample."""
 
 from pathlib import Path
 
@@ -11,7 +11,7 @@ with sync_playwright() as playwright:
     browser = playwright.chromium.launch(headless=True)
     page = browser.new_page(viewport={"width": 1440, "height": 960}, device_scale_factor=1)
     page.goto("http://127.0.0.1:8000", wait_until="networkidle")
-    page.locator("#fileInput").set_input_files(ROOT / "sample_images/14-stop.png")
+    page.locator("#fileInput").set_input_files(ROOT / "sample_images/52-stop.png")
     page.locator("#predictButton").click()
     page.locator("#resultContent").wait_for(state="visible")
     page.wait_for_timeout(700)
@@ -19,4 +19,3 @@ with sync_playwright() as playwright:
     browser.close()
 
 print("Saved docs/system-preview.png")
-

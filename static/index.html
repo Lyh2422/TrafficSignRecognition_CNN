@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="基于卷积神经网络的交通标志识别系统 MVP" />
-    <title>RoadSight · 交通标志识别系统</title>
+    <meta name="description" content="基于卷积神经网络的中国交通标志识别系统" />
+    <title>RoadSight CN · 中国交通标志识别系统</title>
     <link rel="stylesheet" href="/static/styles.css" />
   </head>
   <body>
@@ -24,12 +24,12 @@
     <main>
       <section class="hero">
         <div>
-          <p class="eyebrow">CNN TRAFFIC SIGN LAB · MODEL 02</p>
+          <p class="eyebrow">CHINA TRAFFIC SIGN LAB · TSRD MODEL</p>
           <h1>让每一块标志<br /><em>都被准确看见。</em></h1>
         </div>
         <div class="hero-note">
-          <span class="route-number">43</span>
-          <p>覆盖 GTSRB<br />交通标志类别</p>
+          <span class="route-number">58</span>
+          <p>覆盖 TSRD<br />中国交通标志类别</p>
         </div>
       </section>
 
@@ -46,8 +46,8 @@
             <span class="scan-line" aria-hidden="true"></span>
             <div class="drop-prompt" id="dropPrompt">
               <span class="sign-icon">↑</span>
-              <strong>拖入交通标志图片</strong>
-              <small>或点击选择 · 请确保单个标志主体清晰</small>
+              <strong>拖入中国交通标志图片</strong>
+              <small>或点击选择 · 单个标志、正面清晰、裁剪紧凑</small>
             </div>
           </label>
 
@@ -59,6 +59,9 @@
             <button class="primary-button" id="predictButton" disabled>
               <span>开始识别</span><b>→</b>
             </button>
+          </div>
+          <div class="upload-tips" aria-label="推荐图片条件">
+            <span>中国标志</span><span>单一主体</span><span>占画面 60%–90%</span>
           </div>
           <p class="error-message" id="errorMessage" role="alert"></p>
         </article>
@@ -78,7 +81,7 @@
             <div class="winner">
               <div class="class-code" id="classCode">00</div>
               <div>
-                <small>最可能的类别</small>
+                <div class="result-meta"><small>最可能的类别</small><span id="categoryTag">—</span></div>
                 <h3 id="className">—</h3>
                 <p id="classNameEn">—</p>
               </div>
@@ -89,9 +92,16 @@
 
             <div class="top-list" id="topList"></div>
 
+            <div class="decision-strip" id="decisionStrip">
+              <span id="decisionDot"></span>
+              <strong id="decisionLabel">等待判定</strong>
+              <small id="decisionHelp">系统将结合置信度与候选间隔判断结果是否可靠</small>
+            </div>
+
             <div class="metrics">
               <div><small>推理耗时</small><strong id="latencyValue">—</strong></div>
               <div><small>图像尺寸</small><strong id="imageSize">—</strong></div>
+              <div><small>候选间隔</small><strong id="marginValue">—</strong></div>
               <div><small>运行模式</small><strong id="resultMode">—</strong></div>
             </div>
             <p class="mode-warning" id="modeWarning" hidden></p>
@@ -106,7 +116,7 @@
         </div>
         <div class="history-table-wrap">
           <table>
-            <thead><tr><th>文件</th><th>识别类别</th><th>置信度</th><th>耗时</th><th>模式</th><th>时间</th></tr></thead>
+            <thead><tr><th>文件</th><th>识别类别</th><th>置信度</th><th>耗时</th><th>判定</th><th>时间</th></tr></thead>
             <tbody id="historyBody"></tbody>
           </table>
           <p class="history-empty" id="historyEmpty">暂无识别记录，上传第一张图片开始测试。</p>
@@ -116,7 +126,7 @@
 
     <footer>
       <span>TRAFFIC VISION / 2026</span>
-      <p>毕业设计 MVP · 识别记录仅保存在本机数据库</p>
+      <p>中国交通标志识别 · 识别记录仅保存在本机数据库</p>
     </footer>
     <script src="/static/app.js" defer></script>
   </body>

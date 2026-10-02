@@ -30,7 +30,7 @@ with sync_playwright() as playwright:
 
     page.goto("http://127.0.0.1:8000", wait_until="networkidle")
     mode_badge = page.locator("#modeBadge").inner_text()
-    assert mode_badge in {"DEMO MODE", "CNN ONLINE"}
+    assert mode_badge in {"DEMO MODE", "TSRD · 58"}
     assert page.locator("h1").is_visible()
 
     page.locator("#fileInput").set_input_files(
@@ -41,10 +41,10 @@ with sync_playwright() as playwright:
     page.locator("#historyBody tr").first.wait_for(state="visible")
 
     assert page.locator("#className").inner_text() != "—"
-    if mode_badge == "CNN ONLINE":
+    if mode_badge == "TSRD · 58":
         assert "CNN" in page.locator("#resultMode").inner_text()
         if page.locator("#modeWarning").is_visible():
-            assert "置信度较低" in page.locator("#modeWarning").inner_text()
+            assert "无法可靠确认" in page.locator("#modeWarning").inner_text()
     else:
         assert "演示模式" in page.locator("#resultMode").inner_text()
         assert page.locator("#modeWarning").is_visible()

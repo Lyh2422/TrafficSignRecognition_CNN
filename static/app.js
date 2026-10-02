@@ -69,15 +69,24 @@ function renderResult(data) {
   const confidence = data.prediction.confidence * 100;
   elements.emptyResult.hidden = true;
   elements.resultContent.hidden = false;
-  elements.resultState.textContent = `记录 #${data.record_id}`;
+  elements.resultState.textContent = `${data.recognized ? "可靠识别" : "结果待确认"} · #${data.record_id}`;
   $("#classCode").textContent = String(data.prediction.id).padStart(2, "0");
   $("#className").textContent = data.prediction.name_zh;
   $("#classNameEn").textContent = data.prediction.name_en;
+  $("#categoryTag").textContent = data.prediction.category;
   $("#confidenceValue").textContent = `${confidence.toFixed(1)}%`;
   $("#confidenceRing").style.setProperty("--progress", `${confidence * 3.6}deg`);
   $("#latencyValue").textContent = `${data.inference_ms.toFixed(2)} ms`;
   $("#imageSize").textContent = `${data.image.width} × ${data.image.height}`;
-  $("#resultMode").textContent = data.mode === "cnn" ? "CNN 模型" : "演示模式";
+  $("#marginValue").textContent = `${(data.confidence_margin * 100).toFixed(1)}%`;
+  $("#resultMode").textContent = data.mode === "cnn" ? "中国 CNN" : "演示模式";
+
+  const decisionStrip = $("#decisionStrip");
+  decisionStrip.classList.toggle("uncertain", !data.recognized);
+  $("#decisionLabel").textContent = data.recognized ? "结果可靠" : "建议重新上传";
+  $("#decisionHelp").textContent = data.recognized
+    ? "首选置信度与候选间隔均达到可靠阈值"
+    : "当前结果仅作候选参考，不建议直接作为最终结论";
 
   $("#topList").innerHTML = data.top3.map((item, index) => `
     <div class="top-item">
@@ -94,8 +103,8 @@ async function loadHealth() {
   try {
     const response = await fetch("/api/health");
     const data = await response.json();
-    elements.systemStatus.textContent = data.mode === "cnn" ? "模型已就绪" : "服务运行正常";
-    elements.modeBadge.textContent = data.mode === "cnn" ? "CNN ONLINE" : "DEMO MODE";
+    elements.systemStatus.textContent = data.mode === "cnn" ? "中国模型已就绪" : "服务运行正常";
+    elements.modeBadge.textContent = data.mode === "cnn" ? `TSRD · ${data.class_count}` : "DEMO MODE";
     elements.modeBadge.title = data.model_message || "";
   } catch {
     elements.systemStatus.textContent = "后端未连接";
@@ -113,7 +122,7 @@ async function loadHistory() {
       <td>${escapeHtml(item.name_zh)} <small>#${String(item.class_id).padStart(2, "0")}</small></td>
       <td>${(item.confidence * 100).toFixed(1)}%</td>
       <td>${item.inference_ms.toFixed(2)} ms</td>
-      <td><span class="mode-tag ${item.mode}">${item.mode === "cnn" ? "CNN" : "DEMO"}</span></td>
+      <td><span class="mode-tag ${item.recognized ? "accepted" : "uncertain"}">${item.recognized ? "可靠" : "待确认"}</span></td>
       <td>${escapeHtml(item.created_at)}</td>
     </tr>`).join("");
 }
