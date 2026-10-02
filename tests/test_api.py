@@ -58,3 +58,18 @@ def test_rejects_non_image_file():
 def test_rejects_corrupted_image():
     response = client.post("/api/predict", files={"file": ("bad.png", b"broken", "image/png")})
     assert response.status_code == 422
+
+
+def test_real_model_recognizes_chinese_no_entry_sample():
+    sample = Path(__file__).parent.parent / "sample_images" / "55-no-entry.png"
+    response = client.post(
+        "/api/predict",
+        files={"file": (sample.name, sample.read_bytes(), "image/png")},
+    )
+
+    assert response.status_code == 200
+    result = response.json()
+    assert result["mode"] == "cnn"
+    assert result["recognized"] is True
+    assert result["prediction"]["id"] == 55
+    assert result["prediction"]["name_zh"] == "禁止驶入"

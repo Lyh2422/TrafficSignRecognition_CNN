@@ -1,303 +1,524 @@
 [
   {
     "id": 0,
-    "name_zh": "限速20",
-    "name_en": "Speed limit 20 km/h",
-    "filename": "00-speed-limit-20-km-h.png",
-    "confidence": 0.978412
+    "name_zh": "限速5km/h",
+    "name_en": "Speed limit 5 km/h",
+    "category": "限速",
+    "filename": "00-speed-limit-5-km-h.png",
+    "confidence": 0.975327,
+    "source_split": "test"
   },
   {
     "id": 1,
-    "name_zh": "限速30",
-    "name_en": "Speed limit 30 km/h",
-    "filename": "01-speed-limit-30-km-h.png",
-    "confidence": 0.990875
+    "name_zh": "限速15km/h",
+    "name_en": "Speed limit 15 km/h",
+    "category": "限速",
+    "filename": "01-speed-limit-15-km-h.png",
+    "confidence": 0.941574,
+    "source_split": "test"
   },
   {
     "id": 2,
-    "name_zh": "限速50",
-    "name_en": "Speed limit 50 km/h",
-    "filename": "02-speed-limit-50-km-h.png",
-    "confidence": 0.989926
+    "name_zh": "限速30km/h",
+    "name_en": "Speed limit 30 km/h",
+    "category": "限速",
+    "filename": "02-speed-limit-30-km-h.png",
+    "confidence": 0.95508,
+    "source_split": "test"
   },
   {
     "id": 3,
-    "name_zh": "限速60",
-    "name_en": "Speed limit 60 km/h",
-    "filename": "03-speed-limit-60-km-h.png",
-    "confidence": 0.994212
+    "name_zh": "限速40km/h",
+    "name_en": "Speed limit 40 km/h",
+    "category": "限速",
+    "filename": "03-speed-limit-40-km-h.png",
+    "confidence": 0.990084,
+    "source_split": "test"
   },
   {
     "id": 4,
-    "name_zh": "限速70",
-    "name_en": "Speed limit 70 km/h",
-    "filename": "04-speed-limit-70-km-h.png",
-    "confidence": 0.990545
+    "name_zh": "限速50km/h",
+    "name_en": "Speed limit 50 km/h",
+    "category": "限速",
+    "filename": "04-speed-limit-50-km-h.png",
+    "confidence": 0.993546,
+    "source_split": "test"
   },
   {
     "id": 5,
-    "name_zh": "限速80",
-    "name_en": "Speed limit 80 km/h",
-    "filename": "05-speed-limit-80-km-h.png",
-    "confidence": 0.996003
+    "name_zh": "限速60km/h",
+    "name_en": "Speed limit 60 km/h",
+    "category": "限速",
+    "filename": "05-speed-limit-60-km-h.png",
+    "confidence": 0.978559,
+    "source_split": "test"
   },
   {
     "id": 6,
-    "name_zh": "解除限速80",
-    "name_en": "End of speed limit 80 km/h",
-    "filename": "06-end-of-speed-limit-80-km-h.png",
-    "confidence": 0.987852
+    "name_zh": "限速70km/h",
+    "name_en": "Speed limit 70 km/h",
+    "category": "限速",
+    "filename": "06-speed-limit-70-km-h.png",
+    "confidence": 0.938464,
+    "source_split": "test"
   },
   {
     "id": 7,
-    "name_zh": "限速100",
-    "name_en": "Speed limit 100 km/h",
-    "filename": "07-speed-limit-100-km-h.png",
-    "confidence": 0.990681
+    "name_zh": "限速80km/h",
+    "name_en": "Speed limit 80 km/h",
+    "category": "限速",
+    "filename": "07-speed-limit-80-km-h.png",
+    "confidence": 0.964499,
+    "source_split": "test"
   },
   {
     "id": 8,
-    "name_zh": "限速120",
-    "name_en": "Speed limit 120 km/h",
-    "filename": "08-speed-limit-120-km-h.png",
-    "confidence": 0.992848
+    "name_zh": "禁止直行和左转",
+    "name_en": "No straight or left turn",
+    "category": "禁令",
+    "filename": "08-no-straight-or-left-turn.png",
+    "confidence": 0.952991,
+    "source_split": "test"
   },
   {
     "id": 9,
-    "name_zh": "禁止超车",
-    "name_en": "No passing",
-    "filename": "09-no-passing.png",
-    "confidence": 0.99385
+    "name_zh": "禁止直行和右转",
+    "name_en": "No straight or right turn",
+    "category": "禁令",
+    "filename": "09-no-straight-or-right-turn.png",
+    "confidence": 0.833668,
+    "source_split": "train"
   },
   {
     "id": 10,
-    "name_zh": "禁止货车超车",
-    "name_en": "No passing for vehicles over 3.5 t",
-    "filename": "10-no-passing-for-vehicles-over-3-5-t.png",
-    "confidence": 0.990535
+    "name_zh": "禁止直行",
+    "name_en": "No straight ahead",
+    "category": "禁令",
+    "filename": "10-no-straight-ahead.png",
+    "confidence": 0.948473,
+    "source_split": "test"
   },
   {
     "id": 11,
-    "name_zh": "下一路口优先",
-    "name_en": "Right-of-way at the next intersection",
-    "filename": "11-right-of-way-at-the-next-intersection.png",
-    "confidence": 0.99479
+    "name_zh": "禁止向左转弯",
+    "name_en": "No left turn",
+    "category": "禁令",
+    "filename": "11-no-left-turn.png",
+    "confidence": 0.972848,
+    "source_split": "test"
   },
   {
     "id": 12,
-    "name_zh": "优先道路",
-    "name_en": "Priority road",
-    "filename": "12-priority-road.png",
-    "confidence": 0.990034
+    "name_zh": "禁止向左向右转弯",
+    "name_en": "No left or right turn",
+    "category": "禁令",
+    "filename": "12-no-left-or-right-turn.png",
+    "confidence": 0.985251,
+    "source_split": "test"
   },
   {
     "id": 13,
-    "name_zh": "让行",
-    "name_en": "Yield",
-    "filename": "13-yield.png",
-    "confidence": 0.991153
+    "name_zh": "禁止向右转弯",
+    "name_en": "No right turn",
+    "category": "禁令",
+    "filename": "13-no-right-turn.png",
+    "confidence": 0.984226,
+    "source_split": "test"
   },
   {
     "id": 14,
-    "name_zh": "停车让行",
-    "name_en": "Stop",
-    "filename": "14-stop.png",
-    "confidence": 0.982467
+    "name_zh": "禁止超车",
+    "name_en": "No overtaking",
+    "category": "禁令",
+    "filename": "14-no-overtaking.png",
+    "confidence": 0.966127,
+    "source_split": "test"
   },
   {
     "id": 15,
-    "name_zh": "禁止车辆通行",
-    "name_en": "No vehicles",
-    "filename": "15-no-vehicles.png",
-    "confidence": 0.992917
+    "name_zh": "禁止掉头",
+    "name_en": "No U-turn",
+    "category": "禁令",
+    "filename": "15-no-u-turn.png",
+    "confidence": 0.957749,
+    "source_split": "test"
   },
   {
     "id": 16,
-    "name_zh": "禁止3.5吨以上车辆",
-    "name_en": "Vehicles over 3.5 t prohibited",
-    "filename": "16-vehicles-over-3-5-t-prohibited.png",
-    "confidence": 0.993467
+    "name_zh": "禁止机动车驶入",
+    "name_en": "No motor vehicles",
+    "category": "禁令",
+    "filename": "16-no-motor-vehicles.png",
+    "confidence": 0.978854,
+    "source_split": "test"
   },
   {
     "id": 17,
-    "name_zh": "禁止驶入",
-    "name_en": "No entry",
-    "filename": "17-no-entry.png",
-    "confidence": 0.992596
+    "name_zh": "禁止鸣喇叭",
+    "name_en": "No honking",
+    "category": "禁令",
+    "filename": "17-no-honking.png",
+    "confidence": 0.934804,
+    "source_split": "test"
   },
   {
     "id": 18,
-    "name_zh": "一般危险",
-    "name_en": "General caution",
-    "filename": "18-general-caution.png",
-    "confidence": 0.991704
+    "name_zh": "解除40km/h限速",
+    "name_en": "End of 40 km/h limit",
+    "category": "禁令",
+    "filename": "18-end-of-40-km-h-limit.png",
+    "confidence": 0.978626,
+    "source_split": "train"
   },
   {
     "id": 19,
-    "name_zh": "向左急转弯",
-    "name_en": "Dangerous curve to the left",
-    "filename": "19-dangerous-curve-to-the-left.png",
-    "confidence": 0.988814
+    "name_zh": "解除50km/h限速",
+    "name_en": "End of 50 km/h limit",
+    "category": "禁令",
+    "filename": "19-end-of-50-km-h-limit.png",
+    "confidence": 0.952046,
+    "source_split": "train"
   },
   {
     "id": 20,
-    "name_zh": "向右急转弯",
-    "name_en": "Dangerous curve to the right",
-    "filename": "20-dangerous-curve-to-the-right.png",
-    "confidence": 0.993045
+    "name_zh": "直行和向右转弯",
+    "name_en": "Straight or right turn",
+    "category": "指示",
+    "filename": "20-straight-or-right-turn.png",
+    "confidence": 0.894529,
+    "source_split": "test"
   },
   {
     "id": 21,
-    "name_zh": "连续弯路",
-    "name_en": "Double curve",
-    "filename": "21-double-curve.png",
-    "confidence": 0.993868
+    "name_zh": "直行",
+    "name_en": "Straight ahead",
+    "category": "指示",
+    "filename": "21-straight-ahead.png",
+    "confidence": 0.951688,
+    "source_split": "test"
   },
   {
     "id": 22,
-    "name_zh": "路面颠簸",
-    "name_en": "Bumpy road",
-    "filename": "22-bumpy-road.png",
-    "confidence": 0.987534
+    "name_zh": "向左转弯",
+    "name_en": "Turn left",
+    "category": "指示",
+    "filename": "22-turn-left.png",
+    "confidence": 0.96606,
+    "source_split": "test"
   },
   {
     "id": 23,
-    "name_zh": "路面湿滑",
-    "name_en": "Slippery road",
-    "filename": "23-slippery-road.png",
-    "confidence": 0.99559
+    "name_zh": "向左或向右转弯",
+    "name_en": "Turn left or right",
+    "category": "指示",
+    "filename": "23-turn-left-or-right.png",
+    "confidence": 0.95736,
+    "source_split": "test"
   },
   {
     "id": 24,
-    "name_zh": "右侧变窄",
-    "name_en": "Road narrows on the right",
-    "filename": "24-road-narrows-on-the-right.png",
-    "confidence": 0.984311
+    "name_zh": "向右转弯",
+    "name_en": "Turn right",
+    "category": "指示",
+    "filename": "24-turn-right.png",
+    "confidence": 0.972203,
+    "source_split": "test"
   },
   {
     "id": 25,
-    "name_zh": "道路施工",
-    "name_en": "Road work",
-    "filename": "25-road-work.png",
-    "confidence": 0.990175
+    "name_zh": "靠左侧行驶",
+    "name_en": "Keep left",
+    "category": "指示",
+    "filename": "25-keep-left.png",
+    "confidence": 0.957268,
+    "source_split": "test"
   },
   {
     "id": 26,
-    "name_zh": "交通信号灯",
-    "name_en": "Traffic signals",
-    "filename": "26-traffic-signals.png",
-    "confidence": 0.990471
+    "name_zh": "靠右侧行驶",
+    "name_en": "Keep right",
+    "category": "指示",
+    "filename": "26-keep-right.png",
+    "confidence": 0.931155,
+    "source_split": "test"
   },
   {
     "id": 27,
-    "name_zh": "行人",
-    "name_en": "Pedestrians",
-    "filename": "27-pedestrians.png",
-    "confidence": 0.98539
+    "name_zh": "环岛行驶",
+    "name_en": "Roundabout",
+    "category": "指示",
+    "filename": "27-roundabout.png",
+    "confidence": 0.976544,
+    "source_split": "test"
   },
   {
     "id": 28,
-    "name_zh": "儿童",
-    "name_en": "Children crossing",
-    "filename": "28-children-crossing.png",
-    "confidence": 0.992564
+    "name_zh": "机动车行驶",
+    "name_en": "Motor vehicles only",
+    "category": "指示",
+    "filename": "28-motor-vehicles-only.png",
+    "confidence": 0.948307,
+    "source_split": "test"
   },
   {
     "id": 29,
-    "name_zh": "自行车",
-    "name_en": "Bicycles crossing",
-    "filename": "29-bicycles-crossing.png",
-    "confidence": 0.995043
+    "name_zh": "鸣喇叭",
+    "name_en": "Sound horn",
+    "category": "指示",
+    "filename": "29-sound-horn.png",
+    "confidence": 0.979174,
+    "source_split": "test"
   },
   {
     "id": 30,
-    "name_zh": "冰雪路面",
-    "name_en": "Beware of ice/snow",
-    "filename": "30-beware-of-ice-snow.png",
-    "confidence": 0.989057
+    "name_zh": "非机动车行驶",
+    "name_en": "Non-motor vehicles only",
+    "category": "指示",
+    "filename": "30-non-motor-vehicles-only.png",
+    "confidence": 0.934586,
+    "source_split": "test"
   },
   {
     "id": 31,
-    "name_zh": "野生动物",
-    "name_en": "Wild animals crossing",
-    "filename": "31-wild-animals-crossing.png",
-    "confidence": 0.988517
+    "name_zh": "允许掉头",
+    "name_en": "U-turn permitted",
+    "category": "指示",
+    "filename": "31-u-turn-permitted.png",
+    "confidence": 0.983391,
+    "source_split": "test"
   },
   {
     "id": 32,
-    "name_zh": "解除所有限制",
-    "name_en": "End of all restrictions",
-    "filename": "32-end-of-all-restrictions.png",
-    "confidence": 0.992709
+    "name_zh": "左右绕行",
+    "name_en": "Pass either side",
+    "category": "指示",
+    "filename": "32-pass-either-side.png",
+    "confidence": 0.979508,
+    "source_split": "test"
   },
   {
     "id": 33,
-    "name_zh": "前方右转",
-    "name_en": "Turn right ahead",
-    "filename": "33-turn-right-ahead.png",
-    "confidence": 0.980824
+    "name_zh": "注意交通信号灯",
+    "name_en": "Traffic signals ahead",
+    "category": "警告",
+    "filename": "33-traffic-signals-ahead.png",
+    "confidence": 0.985633,
+    "source_split": "train"
   },
   {
     "id": 34,
-    "name_zh": "前方左转",
-    "name_en": "Turn left ahead",
-    "filename": "34-turn-left-ahead.png",
-    "confidence": 0.991645
+    "name_zh": "注意危险",
+    "name_en": "General caution",
+    "category": "警告",
+    "filename": "34-general-caution.png",
+    "confidence": 0.944291,
+    "source_split": "test"
   },
   {
     "id": 35,
-    "name_zh": "只准直行",
-    "name_en": "Ahead only",
-    "filename": "35-ahead-only.png",
-    "confidence": 0.979287
+    "name_zh": "注意行人",
+    "name_en": "Pedestrians",
+    "category": "警告",
+    "filename": "35-pedestrians.png",
+    "confidence": 0.976657,
+    "source_split": "test"
   },
   {
     "id": 36,
-    "name_zh": "直行或右转",
-    "name_en": "Go straight or right",
-    "filename": "36-go-straight-or-right.png",
-    "confidence": 0.990649
+    "name_zh": "注意非机动车",
+    "name_en": "Non-motor vehicles",
+    "category": "警告",
+    "filename": "36-non-motor-vehicles.png",
+    "confidence": 0.974153,
+    "source_split": "test"
   },
   {
     "id": 37,
-    "name_zh": "直行或左转",
-    "name_en": "Go straight or left",
-    "filename": "37-go-straight-or-left.png",
-    "confidence": 0.992857
+    "name_zh": "注意儿童",
+    "name_en": "Children",
+    "category": "警告",
+    "filename": "37-children.png",
+    "confidence": 0.987212,
+    "source_split": "test"
   },
   {
     "id": 38,
-    "name_zh": "靠右行驶",
-    "name_en": "Keep right",
-    "filename": "38-keep-right.png",
-    "confidence": 0.989434
+    "name_zh": "向右急转弯",
+    "name_en": "Sharp right turn",
+    "category": "警告",
+    "filename": "38-sharp-right-turn.png",
+    "confidence": 0.961815,
+    "source_split": "test"
   },
   {
     "id": 39,
-    "name_zh": "靠左行驶",
-    "name_en": "Keep left",
-    "filename": "39-keep-left.png",
-    "confidence": 0.994369
+    "name_zh": "向左急转弯",
+    "name_en": "Sharp left turn",
+    "category": "警告",
+    "filename": "39-sharp-left-turn.png",
+    "confidence": 0.966559,
+    "source_split": "test"
   },
   {
     "id": 40,
-    "name_zh": "环岛行驶",
-    "name_en": "Roundabout mandatory",
-    "filename": "40-roundabout-mandatory.png",
-    "confidence": 0.997802
+    "name_zh": "下陡坡",
+    "name_en": "Steep descent",
+    "category": "警告",
+    "filename": "40-steep-descent.png",
+    "confidence": 0.958092,
+    "source_split": "test"
   },
   {
     "id": 41,
-    "name_zh": "解除禁止超车",
-    "name_en": "End of no passing",
-    "filename": "41-end-of-no-passing.png",
-    "confidence": 0.949708
+    "name_zh": "上陡坡",
+    "name_en": "Steep ascent",
+    "category": "警告",
+    "filename": "41-steep-ascent.png",
+    "confidence": 0.903976,
+    "source_split": "test"
   },
   {
     "id": 42,
-    "name_zh": "解除货车禁止超车",
-    "name_en": "End of no passing by vehicles over 3.5 t",
-    "filename": "42-end-of-no-passing-by-vehicles-over-3-5-t.png",
-    "confidence": 0.994042
+    "name_zh": "慢行",
+    "name_en": "Slow down",
+    "category": "警告",
+    "filename": "42-slow-down.png",
+    "confidence": 0.975618,
+    "source_split": "test"
+  },
+  {
+    "id": 43,
+    "name_zh": "右侧T形路口",
+    "name_en": "T-junction on right",
+    "category": "警告",
+    "filename": "43-t-junction-on-right.png",
+    "confidence": 0.988597,
+    "source_split": "test"
+  },
+  {
+    "id": 44,
+    "name_zh": "左侧T形路口",
+    "name_en": "T-junction on left",
+    "category": "警告",
+    "filename": "44-t-junction-on-left.png",
+    "confidence": 0.981457,
+    "source_split": "test"
+  },
+  {
+    "id": 45,
+    "name_zh": "村庄",
+    "name_en": "Village",
+    "category": "警告",
+    "filename": "45-village.png",
+    "confidence": 0.954195,
+    "source_split": "test"
+  },
+  {
+    "id": 46,
+    "name_zh": "反向弯路",
+    "name_en": "Reverse curves",
+    "category": "警告",
+    "filename": "46-reverse-curves.png",
+    "confidence": 0.964774,
+    "source_split": "test"
+  },
+  {
+    "id": 47,
+    "name_zh": "无人看守铁路道口",
+    "name_en": "Unguarded railway crossing",
+    "category": "警告",
+    "filename": "47-unguarded-railway-crossing.png",
+    "confidence": 0.962375,
+    "source_split": "test"
+  },
+  {
+    "id": 48,
+    "name_zh": "施工",
+    "name_en": "Road works",
+    "category": "警告",
+    "filename": "48-road-works.png",
+    "confidence": 0.938332,
+    "source_split": "test"
+  },
+  {
+    "id": 49,
+    "name_zh": "连续弯路",
+    "name_en": "Winding road",
+    "category": "警告",
+    "filename": "49-winding-road.png",
+    "confidence": 0.974399,
+    "source_split": "test"
+  },
+  {
+    "id": 50,
+    "name_zh": "有人看守铁路道口",
+    "name_en": "Guarded railway crossing",
+    "category": "警告",
+    "filename": "50-guarded-railway-crossing.png",
+    "confidence": 0.977771,
+    "source_split": "test"
+  },
+  {
+    "id": 51,
+    "name_zh": "事故易发路段",
+    "name_en": "Accident-prone area",
+    "category": "警告",
+    "filename": "51-accident-prone-area.png",
+    "confidence": 0.986915,
+    "source_split": "test"
+  },
+  {
+    "id": 52,
+    "name_zh": "停车让行",
+    "name_en": "Stop",
+    "category": "禁令",
+    "filename": "52-stop.png",
+    "confidence": 0.981855,
+    "source_split": "test"
+  },
+  {
+    "id": 53,
+    "name_zh": "禁止通行",
+    "name_en": "No thoroughfare",
+    "category": "禁令",
+    "filename": "53-no-thoroughfare.png",
+    "confidence": 0.949925,
+    "source_split": "test"
+  },
+  {
+    "id": 54,
+    "name_zh": "禁止停车",
+    "name_en": "No parking",
+    "category": "禁令",
+    "filename": "54-no-parking.png",
+    "confidence": 0.989977,
+    "source_split": "test"
+  },
+  {
+    "id": 55,
+    "name_zh": "禁止驶入",
+    "name_en": "No entry",
+    "category": "禁令",
+    "filename": "55-no-entry.png",
+    "confidence": 0.949306,
+    "source_split": "test"
+  },
+  {
+    "id": 56,
+    "name_zh": "减速让行",
+    "name_en": "Give way",
+    "category": "禁令",
+    "filename": "56-give-way.png",
+    "confidence": 0.974778,
+    "source_split": "test"
+  },
+  {
+    "id": 57,
+    "name_zh": "停车检查",
+    "name_en": "Stop for inspection",
+    "category": "禁令",
+    "filename": "57-stop-for-inspection.png",
+    "confidence": 0.858421,
+    "source_split": "test"
   }
 ]
